@@ -30,7 +30,7 @@ function getRandomNumber(min, max) {
 
 function generateNumbers() {
     randomNumbers.length = 0;
-    while (randomNumbers.length < 2) {
+    while (randomNumbers.length < 5) {
         let numbers = getRandomNumber(1, 100);
 
         if (!randomNumbers.includes(numbers)) {
@@ -49,21 +49,33 @@ rightNumbers = [];
 function controllo() {
     let input = document.getElementById('input').value;
     input = parseInt(input);
+    score = 0;
+
+    for (let i = 0; i < randomNumbers.length; i++) {
+        
+        if (rightNumbers.includes(randomNumbers[i])) {
+            errorH1.innerText = `Hai vinto!`
+            console.log('hai vinto');
+            score++
+        }
+    }
+
+
     if (randomNumbers.includes(input)) {
-        punteggio.innerText = `Indovinato! ${input}`;
+        score++
+        punteggio.innerText = `Punteggio: ${score}`;
         console.log(input);
         rightNumbers.push(input);
         console.log('numeri giusti', rightNumbers);
-        for (let i = 0; i < randomNumbers.length; i++) {
-            if (rightNumbers.includes(randomNumbers[i])) {
-                errorH1.innerText = `Hai vinto!`
-                console.log('hai vinto')
-            }
-        }
+
+
     } else {
         errorH1.innerText = `Questo numero è errato! ${input}`
     }
 }
+
+
+
 
 
 
