@@ -38,13 +38,15 @@ function generateNumbers() {
     }
     console.log('numeri random', randomNumbers)
     numeriGenerati.innerText = `Memorizza! ${randomNumbers.join(', ')}`
+    rightNumbers = [];
+   
 }
 //
 //funzione controllo numeri
 
 
 
-rightNumbers = [];
+
 
 function controllo() {
 
@@ -54,14 +56,11 @@ function controllo() {
 
     for (let i = 0; i < randomNumbers.length; i++) {
         console.log(randomNumbers)
-        if (randomNumbers.length - 1 <= rightNumbers.length) {
+        if (randomNumbers.length > rightNumbers.length +1) {} else if (rightNumbers.includes(randomNumbers[i])) {
             errorH1.innerText = `Hai vinto!`
             console.log('hai vinto');
-            score++
         }
     }
-
-
     if (randomNumbers.includes(input)) {
         score++
         punteggio.innerText = `Punteggio: ${score}`;
@@ -71,6 +70,7 @@ function controllo() {
     } else {
         errorH1.innerText = `Questo numero è errato! ${input}`
     }
+
 }
 
 
