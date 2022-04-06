@@ -32,7 +32,6 @@ function generateNumbers() {
     randomNumbers.length = 0;
     while (randomNumbers.length < 5) {
         let numbers = getRandomNumber(1, 100);
-
         if (!randomNumbers.includes(numbers)) {
             randomNumbers.push(numbers);
         }
@@ -44,16 +43,18 @@ function generateNumbers() {
 //funzione controllo numeri
 
 
+
 rightNumbers = [];
 
 function controllo() {
+
     let input = document.getElementById('input').value;
     input = parseInt(input);
     score = 0;
 
     for (let i = 0; i < randomNumbers.length; i++) {
-        
-        if (rightNumbers.includes(randomNumbers[i])) {
+        console.log(randomNumbers)
+        if (randomNumbers.length - 1 <= rightNumbers.length) {
             errorH1.innerText = `Hai vinto!`
             console.log('hai vinto');
             score++
@@ -67,12 +68,13 @@ function controllo() {
         console.log(input);
         rightNumbers.push(input);
         console.log('numeri giusti', rightNumbers);
-
-
     } else {
         errorH1.innerText = `Questo numero è errato! ${input}`
     }
 }
+
+
+
 
 
 
