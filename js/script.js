@@ -17,6 +17,7 @@ let buttonVerifica = document.getElementById('verifica');
 buttonVerifica.addEventListener('click', controllo)
 let timerH1 = document.getElementById('timer');
 let punteggio = document.getElementById('punteggio');
+let errorH1 = document.getElementById('error')
 
 /*5 numeri casuali da 1 a 100*/
 let randomNumbers = [];
@@ -29,40 +30,40 @@ function getRandomNumber(min, max) {
 
 function generateNumbers() {
     randomNumbers.length = 0;
-
-    while (randomNumbers.length < 5) {
+    while (randomNumbers.length < 2) {
         let numbers = getRandomNumber(1, 100);
 
         if (!randomNumbers.includes(numbers)) {
             randomNumbers.push(numbers);
-            console.log(numbers)
         }
     }
-    numeriGenerati.innerText = ` ${randomNumbers.join(', ')}`
+    console.log('numeri random', randomNumbers)
+    numeriGenerati.innerText = `Memorizza! ${randomNumbers.join(', ')}`
 }
 //
 //funzione controllo numeri
 
+
+rightNumbers = [];
+
 function controllo() {
     let input = document.getElementById('input').value;
     input = parseInt(input);
-    if(randomNumbers.includes(input)){
-        punteggio.innerText=`Indovinato! ${input}`
-         console.log(input);
-    }else{
-        
+    if (randomNumbers.includes(input)) {
+        punteggio.innerText = `Indovinato! ${input}`;
+        console.log(input);
+        rightNumbers.push(input);
+        console.log('numeri giusti', rightNumbers);
+        for (let i = 0; i < randomNumbers.length; i++) {
+            if (rightNumbers.includes(randomNumbers[i])) {
+                errorH1.innerText = `Hai vinto!`
+                console.log('hai vinto')
+            }
+        }
+    } else {
+        errorH1.innerText = `Questo numero è errato! ${input}`
     }
-   
-
-
 }
-
-
-
-
-
-
-
 
 
 
@@ -75,15 +76,16 @@ function controllo() {
 
 
 function start() {
-    let secondiDiArrivo = 10;
+    errorH1.innerText = '';
+    let secondiDiArrivo = 5;
     let secondi = 0;
 
-    let timer = setInterval(countDown, 300)
+    let timer = setInterval(countDown, 500)
 
     function countDown() {
-        console.log(secondi, 'è passato un secondo')
+
         secondi++;
-        timerH1.innerText = +`${secondi}`
+        timerH1.innerText = `Timer: ${secondi}`
         if (secondi >= secondiDiArrivo) {
             numeriGenerati.innerText = '';
             clearInterval(timer)
