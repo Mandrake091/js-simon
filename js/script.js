@@ -9,11 +9,12 @@ Buon lavoro e buon divertimento !!! :grande_sorriso: */
 
 let buttonGenera = document.getElementById('genera');
 buttonGenera.addEventListener('click', generateNumbers);
-buttonGenera.addEventListener('click', timer);
+buttonGenera.addEventListener('click', start);
 
 let numeriGenerati = document.getElementById('numeriGenerati')
 let input = document.getElementById('input');
 let buttonVerifica = document.getElementById('verifica');
+buttonVerifica.addEventListener('click', controllo)
 let timerH1 = document.getElementById('timer');
 let punteggio = document.getElementById('punteggio');
 
@@ -40,25 +41,53 @@ function generateNumbers() {
     numeriGenerati.innerText = ` ${randomNumbers.join(', ')}`
 }
 //
+//funzione controllo numeri
 
-
-
-
- let secondiDiArrivo = 5;
-let secondi=0;
-
-
-
-function timer() {
-    const countDown = setInterval(timer, 1000);
-
-    console.log(secondi, 'è passato un secondo')
+function controllo() {
+    let input = document.getElementById('input').value;
+    input = parseInt(input);
+    if(randomNumbers.includes(input)){
+        punteggio.innerText=`Indovinato! ${input}`
+         console.log(input);
+    }else{
+        
+    }
    
-    if (secondi <= secondiDiArrivo ) {
-        timerH1.innerText =+`${secondi}` 
-        secondi++;
-    } else {
-        clearInterval(timer)
-    } 
+
+
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+//funzione timer
+
+
+
+function start() {
+    let secondiDiArrivo = 10;
+    let secondi = 0;
+
+    let timer = setInterval(countDown, 300)
+
+    function countDown() {
+        console.log(secondi, 'è passato un secondo')
+        secondi++;
+        timerH1.innerText = +`${secondi}`
+        if (secondi >= secondiDiArrivo) {
+            numeriGenerati.innerText = '';
+            clearInterval(timer)
+            clearInterval(countDown)
+        }
+    }
+}
